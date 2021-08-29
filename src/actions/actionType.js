@@ -1,0 +1,2 @@
+export const POST_CURRENT_USER = 'POST_CURRENT_USER';
+export const GET_ROUTINES = 'GET_ROUTINES';
