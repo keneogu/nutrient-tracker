@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+// import store from '../store';
+import { Redirect } from 'react-router-dom';
 import postCurrentUser from '../actions';
 import signupApi from '../API/signupApi';
 
 function SignUp() {
   const dispatch = useDispatch();
-  // const [redirect, setRedirect] = useState();
+  const [redirect, setRedirect] = useState();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordconfirmation, setPasswordconfirmation] = useState('');
@@ -18,7 +20,7 @@ function SignUp() {
     try {
       const { user } = await signupApi({ username, password });
       dispatch(postCurrentUser(user));
-      // setRedirect(<Redirect to={{ pathname: '/' }} />);
+      setRedirect(<Redirect to={{ pathname: '/' }} />);
     } catch (error) {
       setErrors(error.response.data.errors);
     }
@@ -53,25 +55,18 @@ function SignUp() {
             value={passwordconfirmation}
             placeholder="confirm password"
             onChange={(e) => setPasswordconfirmation(e.target.value)}
-            id="password"
+            id="passwordconfirmation"
           />
         </div>
 
-        <button type="submit">
-          <Link
-            to="/login"
-            className="text-center"
-          >
-            Signup
-          </Link>
-        </button>
+        <button type="submit">Signup</button>
         <p className="pt-5 text-center">Have an account?</p>
-        <Link
+        {/* <Link
           to="/login"
           className="text-center"
         >
           Login
-        </Link>
+        </Link> */}
       </form>
     </div>
   );
